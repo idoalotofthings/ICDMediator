@@ -20,13 +20,13 @@ public class IcdEntity {
     private boolean isResidualOther;
     private boolean isResidualUnspecified;
     private String chapter;
-    private String theCode; // null in JSON -> String is safe
+    private String theCode;
     private double score;
     private boolean titleIsASearchResult;
     private boolean titleIsTopScore;
     private int entityType;
     private boolean important;
-    private List<Object> descendants; // empty array in JSON -> can refine later
+    private List<Object> descendants;
 }
 
 @Data

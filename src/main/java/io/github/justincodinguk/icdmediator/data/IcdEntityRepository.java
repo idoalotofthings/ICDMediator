@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class IcdEntityRepository {
 
-    private IcdApiService apiService;
+    private final IcdApiService apiService;
 
     @Autowired
     public IcdEntityRepository(IcdApiService apiService) {
