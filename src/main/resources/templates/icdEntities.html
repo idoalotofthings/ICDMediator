@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>ICD Entities</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
+        th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background-color: #f5f5f5; }
+        .nested { margin-left: 2rem; }
+    </style>
+</head>
+<body>
+<h1>ICD Entities</h1>
+
+<div th:each="entity : ${entities}">
+    <h2 th:text="${entity.title}"></h2>
+    <p><b>ID:</b> <span th:text="${entity.id}"></span></p>
+    <p><b>Stem ID:</b> <span th:text="${entity.stemId}"></span></p>
+    <p><b>Chapter:</b> <span th:text="${entity.chapter}"></span></p>
+    <p><b>Score:</b> <span th:text="${entity.score}"></span></p>
+    <p><b>Is Leaf:</b> <span th:text="${entity.leaf}"></span></p>
+    <p><b>Has Coding Note:</b> <span th:text="${entity.hasCodingNote}"></span></p>
+
+    <!-- Matching PVs table -->
+    <div th:if="${entity.matchingPVs != null}">
+        <h3>Matching Properties</h3>
+        <table>
+            <tr>
+                <th>Property ID</th>
+                <th>Label</th>
+                <th>Score</th>
+                <th>Important</th>
+                <th>Foundation URI</th>
+                <th>Type</th>
+            </tr>
+            <tr th:each="pv : ${entity.matchingPVs}">
+                <td th:text="${pv.propertyId}"></td>
+                <td th:text="${pv.label}"></td>
+                <td th:text="${pv.score}"></td>
+                <td th:text="${pv.important}"></td>
+                <td th:text="${pv.foundationUri}"></td>
+                <td th:text="${pv.propertyValueType}"></td>
+            </tr>
+        </table>
+    </div>
+
+    <hr/>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ICD Search</title>
+</head>
+<body>
+<h1>ICD Search</h1>
+
+<!-- Search form -->
+<form th:action="@{/icd}" method="get">
+    <input type="text" name="search" placeholder="Enter search term"
+           th:value="${search}">
+    <button type="submit">Search</button>
+</form>
+
+<!-- Results -->
+<div th:if="${entities != null}">
+    <h2>Results for "<span th:text="${search}"></span>"</h2>
+    <ul>
+        <div th:each="entity : ${entities}">
+            <h2 th:text="${entity.title}"></h2>
+            <p><b>ID:</b> <span th:text="${entity.id}"></span></p>
+            <p><b>Stem ID:</b> <span th:text="${entity.stemId}"></span></p>
+            <p><b>Chapter:</b> <span th:text="${entity.chapter}"></span></p>
+            <p><b>Score:</b> <span th:text="${entity.score}"></span></p>
+            <p><b>Is Leaf:</b> <span th:text="${entity.leaf}"></span></p>
+            <p><b>Has Coding Note:</b> <span th:text="${entity.hasCodingNote}"></span></p>
+
+            <!-- Matching PVs table -->
+            <div th:if="${entity.matchingPVs != null}">
+                <h3>Matching Properties</h3>
+                <table>
+                    <tr>
+                        <th>Property ID</th>
+                        <th>Label</th>
+                        <th>Score</th>
+                        <th>Important</th>
+                        <th>Foundation URI</th>
+                        <th>Type</th>
+                    </tr>
+                    <tr th:each="pv : ${entity.matchingPVs}">
+                        <td th:text="${pv.propertyId}"></td>
+                        <td th:text="${pv.label}"></td>
+                        <td th:text="${pv.score}"></td>
+                        <td th:text="${pv.important}"></td>
+                        <td th:text="${pv.foundationUri}"></td>
+                        <td th:text="${pv.propertyValueType}"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <hr/>
+        </div>
+    </ul>
+</div>
+
+</body>
+</html>
