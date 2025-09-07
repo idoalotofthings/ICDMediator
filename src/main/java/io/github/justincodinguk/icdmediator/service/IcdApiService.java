@@ -15,13 +15,11 @@ import java.util.List;
 public class IcdApiService {
 
     private final WebClient webClient;
-    private final WebClient.Builder builder;
 
-    public IcdApiService(@Value("${icd.api.base-url}") String baseUrl, WebClient.Builder builder) {
+    public IcdApiService(@Value("${icd.api.base-url}") String baseUrl) {
         this.webClient = WebClient.builder()
                 .baseUrl(baseUrl)
                 .build();
-        this.builder = builder;
     }
 
     @Cacheable(value = "icdCache", key = "#search")
